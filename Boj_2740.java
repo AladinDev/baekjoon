@@ -1,34 +1,60 @@
-package boj_2740;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.util.*;
 
 public class Main {
+	static int N, M, K;
+	static int[][] A, B, answer;
 
 	public static void main(String[] args) throws IOException {
-
-		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
-		String[] input = br.readLine().split(" ");
-		int[][] nm = new int[Integer.parseInt(input[0])][Integer.parseInt(input[1])];
-		for(int i = 0 ; i < nm.length ; i++) {
-			String[] strArr = br.readLine().split(" ");
-			for(int j = 0 ; j < nm[i].length ; j++) {
-				nm[i][j] = Integer.parseInt(strArr[j]);
+
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+		N = Integer.parseInt(st.nextToken());
+		M = Integer.parseInt(st.nextToken());
+
+		A = new int[N][M];
+		for (int i = 0; i < N; i++) {
+			st = new StringTokenizer(br.readLine(), " ");
+			for (int j = 0; j < M; j++) {
+				A[i][j] = Integer.parseInt(st.nextToken());
 			}
 		}
-		
-		String[] input_2 = br.readLine().split(" ");
-		int[][] mk = new int[Integer.parseInt(input_2[0])][Integer.parseInt(input_2[1])];
-		for (int i = 0; i < mk.length; i++) {
-			String[] strArr = br.readLine().split(" ");
-			for (int j = 0; j < mk[i].length; j++) {
-				mk[i][j] = Integer.parseInt(strArr[j]);
+
+		st = new StringTokenizer(br.readLine(), " ");
+
+		M = Integer.parseInt(st.nextToken());
+		K = Integer.parseInt(st.nextToken());
+
+		B = new int[M][K];
+		for (int i = 0; i < M; i++) {
+			st = new StringTokenizer(br.readLine(), " ");
+			for (int j = 0; j < K; j++) {
+				B[i][j] = Integer.parseInt(st.nextToken());
 			}
 		}
+
+		answer = new int[N][K];
 		
-		
+		StringBuilder sb = new StringBuilder();
+
+		for (int n = 0; n < N; n++) {
+			for (int m = 0; m < M; m++) {
+				for (int k = 0; k < K; k++) {
+					answer[n][k] += A[n][m] * B[m][k];
+				}
+			}
+		}
+
+
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < K; j++) {
+				sb.append(answer[i][j]);
+				sb.append(" ");
+			}
+			sb.append("\n");
+		}
+
+		System.out.println(sb.toString());
 	}
 }
